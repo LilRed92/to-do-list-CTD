@@ -1,0 +1,113 @@
+# ==========================================
+# DEPENDENCIES
+# ==========================================
+bower_components/
+jspm_packages/
+node_modules/
+web_modules/
+
+# ==========================================
+# BUILD OUTPUTS & FRAMEWORKS
+# ==========================================
+*.tgz
+.docusaurus/
+.next/
+.nuxt/
+.vuepress/dist/
+build/
+build/Release/
+dist/
+dist-ssr/
+out/
+
+# ==========================================
+# LOGS & DIAGNOSTICS
+# ==========================================
+*.log
+.node_repl_history
+.pnpm-debug.log*
+lerna-debug.log*
+logs/
+npm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# RUNTIME DATA
+# ==========================================
+*.pid
+*.pid.lock
+*.seed
+pids/
+
+# ==========================================
+# TESTING & COVERAGE
+# ==========================================
+*.lcov
+.nyc_output/
+.vscode-test/
+coverage/
+cypress/screenshots/
+cypress/videos/
+lib-cov/
+playwright-report/
+test-results/
+
+# ==========================================
+# CACHES & TOOLING
+# ==========================================
+*.tsbuildinfo
+.cache/
+.dynamodb/
+.eslintcache
+.fusebox/
+.grunt/
+.lock-wscript
+.npm/
+.parcel-cache/
+.pnp.*
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.serverless/
+.stylelintcache
+.temp/
+.yarn-integrity
+.yarn/build-state.yml
+.yarn/cache
+.yarn/install-state.gz
+.yarn/unplugged
+
+# ==========================================
+# ENVIRONMENT VARIABLES
+# ==========================================
+.env
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+
+# ==========================================
+# IDE & EDITORS
+# ==========================================
+**/.vscode
+.tern-port
+.vscode/
+
+# ==========================================
+# OS SPECIFIC (macOS)
+# ==========================================
+.*_
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# ==========================================
+# USER CUSTOM / PROJECT SPECIFIC
+# ==========================================
+.history/
+TODO
+planning_setup/
+file.tmp

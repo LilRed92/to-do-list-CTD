@@ -1,0 +1,9 @@
+Rule 1: The commit message subject line MUST be 50 characters or less.
+Rule 2: If the diff contains enough context, add a blank line after the subject and write a concise, bulleted body explaining WHAT changed and WHY. If it is a trivial change, leave it as a single line.
+Rule 3: Keep the tone highly professional and technical. Do not use conversational language.
+Rule 4: Only use ONE emoji at the very beginning of the subject line.
+Rule 5: If the code diff shows changes to React hooks (like useState, useEffect) or context providers, explicitly mention 'state management' or 'lifecycle updates' in the body.
+Rule 6: If the diff modifies server routes, database interactions, or API logic, explicitly name the endpoint or data model affected.
+Rule 7: Output ONLY the raw commit message text. Do not wrap the entire output in markdown code blocks.
+Rule 8: Prioritize application logic. If the diff contains changes to tooling/configuration files (like .gitignore, package.json, or Husky) AND application code (like the server/ or client/ directories), the commit subject and body MUST prioritize focus on the application code.
+Rule 9: Ignore developer tooling files. If the diff contains changes to application code alongside tooling configurations (e.g., .vscode/, .husky/, commit scripts, commit reminders), you MUST completely ignore the tooling changes and focus the commit message and body entirely on the application logic. If ONLY tooling files are changed, write a brief `chore(root):` message.
