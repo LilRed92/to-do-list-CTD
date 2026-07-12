@@ -19,5 +19,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          - name: AI-Powered PR Description Generator
-          uses: 57blocks/ai-powered-pr-description-generator@1.1.0

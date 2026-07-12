@@ -6,13 +6,11 @@ To Do List is a clean, lightweight React-based web application designed to help 
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 
-[![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black)](https://github.com/motdotla/dotenv) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/) [![Husky](https://img.shields.io/badge/Husky-black?style=for-the-badge&logo=git&logoColor=white)](https://typicode.github.io/husky/) [![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://netlify.com/)
+[![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black)](https://github.com/motdotla/dotenv) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/) [![Husky](https://img.shields.io/badge/Husky-black?style=for-the-badge&logo=git&logoColor=white)](https://typicode.github.io/husky/)
 
 ## ✨ Features
 
 - **Dynamic Task Dashboard**: View a clean, list-rendered interface containing essential workflow milestones.
-- **State Management Foundations**: Configured with React `useState` hooks to pave the way for interactive, client-side item updates.
-- **Automated Developer Git Hooks**: Includes native Husky integration that automates execution permissions and structures clean development cycles.
 - **Fast Build Times**: Powered by Vite and ESModules for ultra-fast Hot Module Replacement (HMR).
 
 ## 📸 Screenshots
@@ -51,8 +49,6 @@ This application is currently run as a client-side interface using local compone
 | `title`             | `String`          | Description of the task to complete.                             |
 
 ## 🔐 Environment Variables
-
-
 
 
 ## 🚀 How to Run Locally
