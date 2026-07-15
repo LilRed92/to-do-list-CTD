@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate AI Description
-        uses: 57blocks/ai-powered-pr-description-generator@v1.1.0
+        uses: 57blocks/ai-powered-pr-description-generator@1.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
