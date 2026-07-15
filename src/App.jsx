@@ -1,5 +1,5 @@
-import TodoList from './Components/TodoList.jsx';
-import TodoForm from './Components/TodoForm.jsx';
+import TodoList from './TodoList.jsx';
+import TodoForm from './TodoForm.jsx';
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="to-do">
-      <h1>My To-dos</h1>
+      <h1>Todo List</h1>
       <TodoForm />
       <TodoList />
     </div>
