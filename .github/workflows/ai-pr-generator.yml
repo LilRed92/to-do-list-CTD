@@ -2,35 +2,24 @@ name: AI PR Description Generator
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   generate-description:
+    if: ${{ github.event.sender.type != 'Bot' }}
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Generate AI Description
-        uses: 57blocks/ai-powered-pr-description-generator@1.1.0
+        uses: the-pr-agent/pr-agent@v0.39.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        with:
-          custom_prompt: |
-            You are an expert Full-Stack Software Engineer acting as a Pull Request reviewer and documentation generator. Analyze the provided code diffs and generate a structured, highly concise Pull Request description.
-
-            Follow these strict rules for the generated output:
-
-            1. PR Title: Propose a title using the imperative mood (e.g., "Add user authentication" not "Added user authentication" or "Adding user authentication").
-            2. Focus on the "Why": Explain the reasoning behind the architectural or logic choices. Do not simply translate the code diff into English.
-            3. The Big Picture: Summarize how the changes interact across the stack, particularly noting any impacts between the React frontend, the Node/Express backend, and the database.
-            4. Issue Linking: Provide a "Related Issues" section with a placeholder to link tickets (e.g., Closes #<issue_number>).
-            5. Testing Instructions: Generate clear, step-by-step instructions on how a reviewer can pull the branch and test the new feature or fix locally.
-            6. Visual Proof: If frontend UI components were modified, include a bolded placeholder section: **[Insert Screenshots/Screen Recording Here]**.
-            7. Risk Assessment: Highlight any breaking changes, new dependencies, or complex logic that requires careful human review. If none exist, explicitly state "No major risks identified."
-
-            Format the output in clean Markdown using headings, bullet points, and code blocks where appropriate. Keep the summary punchy and avoid filler language.
+          config.model: gemini/gemini-1.5-flash
+          config.fallback_models: '["gemini/gemini-1.5-flash"]'
+          GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_review: "false"
+          github_action_config.auto_improve: "false"
+          github_action_config.pr_actions: '["opened", "reopened", "synchronize", "ready_for_review"]'
