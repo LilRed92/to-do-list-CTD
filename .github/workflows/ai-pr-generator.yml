@@ -50,7 +50,7 @@ jobs:
           ESCAPED_PROMPT=$(jq -R -s '.' <<< "$SYSTEM_PROMPT")
 
           # 3. Call the Gemini 1.5 Flash API directly
-          RESPONSE=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GEMINI_API_KEY" \
+          RESPONSE=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
             -H "Content-Type: application/json" \
             -d "{
               \"contents\": [{
