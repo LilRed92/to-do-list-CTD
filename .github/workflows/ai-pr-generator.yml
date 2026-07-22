@@ -13,24 +13,65 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Generate AI Description
-      uses: 57blocks/ai-powered-pr-description-generator@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         with:
-          custom_prompt: |
-            You are an expert Full-Stack Software Engineer acting as a Pull Request reviewer and documentation generator. Analyze the provided code diffs and generate a structured, highly concise Pull Request description.
+          fetch-depth: 0
 
-            Follow these strict rules for the generated output:
+      - name: Generate and Update PR Description
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # 1. Fetch the code diff using the native GitHub CLI
+          DIFF=$(gh pr diff ${{ github.event.pull_request.number }})
+          
+          # Exit gracefully if there is no diff
+          if [ -z "$DIFF" ]; then
+            echo "No changes found in diff."
+            exit 0
+          fi
 
-            1. PR Title: Propose a title using the imperative mood (e.g., "Add user authentication" not "Added user authentication" or "Adding user authentication").
-            2. Focus on the "Why": Explain the reasoning behind the architectural or logic choices. Do not simply translate the code diff into English.
-            3. The Big Picture: Summarize how the changes interact across the stack, particularly noting any impacts between the React frontend, the Node/Express backend, and the database.
-            4. Issue Linking: Provide a "Related Issues" section with a placeholder to link tickets (e.g., Closes #<issue_number>).
-            5. Testing Instructions: Generate clear, step-by-step instructions on how a reviewer can pull the branch and test the new feature or fix locally.
-            6. Visual Proof: If frontend UI components were modified, include a bolded placeholder section: **[Insert Screenshots/Screen Recording Here]**.
-            7. Risk Assessment: Highlight any breaking changes, new dependencies, or complex logic that requires careful human review. If none exist, explicitly state "No major risks identified."
+          # Safely escape the diff for the JSON payload
+          ESCAPED_DIFF=$(jq -R -s '.' <<< "$DIFF")
 
-            Format the output in clean Markdown using headings, bullet points, and code blocks where appropriate. Keep the summary punchy and avoid filler language.
+          # 2. Define the exact system prompt
+          SYSTEM_PROMPT="You are an expert Full-Stack Software Engineer acting as a Pull Request reviewer and documentation generator. Analyze the provided code diffs and generate a structured, highly concise Pull Request description. 
+
+          Follow these strict rules for the generated output:
+          1. PR Title: Propose a title using the imperative mood (e.g., 'Add user authentication').
+          2. Focus on the \"Why\": Explain the reasoning behind the architectural or logic choices.
+          3. The Big Picture: Summarize how the changes interact across the stack (React frontend, Node/Express backend, PostgreSQL database).
+          4. Issue Linking: Provide a \"Related Issues\" section with a placeholder to link tickets (e.g., Closes #<issue_number>).
+          5. Testing Instructions: Generate clear, step-by-step instructions on how to pull the branch and test locally.
+          6. Visual Proof: If frontend UI components were modified, include a bolded placeholder: **[Insert Screenshots/Screen Recording Here]**.
+          7. Risk Assessment: Highlight any breaking changes, new dependencies, or complex logic. If none exist, explicitly state 'No major risks identified.'
+
+          Format the output in clean Markdown using headings, bullet points, and code blocks where appropriate. ONLY output the raw Markdown for the PR description. Do not include introductory filler text."
+
+          ESCAPED_PROMPT=$(jq -R -s '.' <<< "$SYSTEM_PROMPT")
+
+          # 3. Call the Gemini 1.5 Flash API directly
+          RESPONSE=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"contents\": [{
+                \"parts\": [
+                  {\"text\": $ESCAPED_PROMPT},
+                  {\"text\": \"\n\nHere is the diff to analyze:\n\"},
+                  {\"text\": $ESCAPED_DIFF}
+                ]
+              }]
+            }")
+
+          # 4. Extract the generated Markdown from the JSON response
+          PR_DESCRIPTION=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text')
+
+          # Validate the API actually returned a description
+          if [ "$PR_DESCRIPTION" == "null" ] || [ -z "$PR_DESCRIPTION" ]; then
+            echo "Gemini API Request failed or returned empty data."
+            echo "Response: $RESPONSE"
+            exit 1
+          fi
+
+          # 5. Save to a temporary file and push the update to the PR
+          echo "$PR_DESCRIPTION" > pr-description.md
+          gh pr edit ${{ github.event.pull_request.number }} --body-file pr-description.md
