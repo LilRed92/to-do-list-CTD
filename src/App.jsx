@@ -8,7 +8,7 @@ function App() {
 const [todoList, setTodoList] = useState([]);
 
 function addTodo(todoTitle) {
-  let newTodo = {
+  const newTodo = {
     id: Date.now(),
     title: todoTitle,
   };
