@@ -20,7 +20,7 @@ function TodosPage({ token }) {
           credentials: 'include',
         });
 
-        if (response.status === 401) throw new Error('Unauthorized');
+        if (response.status === 401) throw new Error('unauthorized');
         if (!response.ok) throw new Error('Failed to fetch tasks');
 
         const data = await response.json();
@@ -58,15 +58,14 @@ function TodosPage({ token }) {
 
       setTodoList(prev => prev.map(t => t.id === tempId ? realTodo : t));
     } catch (err) {
-      setError(`Failed to create task. ${err.message}`);
+      setError(`Failed to create todo. ${err.message}`);
       setTodoList(prev => prev.filter(t => t.id !== tempId));
     }
   };
 
   const completeTodo = async (id) => {
-    const originalTodoList = [...todoList];
+    const originalTodo = todoList.find(t => t.id === id);
 
-    // Optimistic UI change
     setTodoList(prev => prev.map(t => t.id === id ? { ...t, isCompleted: true } : t));
 
     try {
@@ -80,17 +79,16 @@ function TodosPage({ token }) {
         body: JSON.stringify({ isCompleted: true })
       });
 
-      if (!response.ok) throw new Error('Server rejected status patch');
+      if (!response.ok) throw new Error('Server rejected updates');
     } catch (err) {
       setError(`Status update failed. ${err.message}`);
-      setTodoList(originalTodoList); // Rollback
+      setTodoList(prev => prev.map(t => t.id === id ? originalTodo : t));
     }
   };
 
   const updateTodo = async (editedTodo) => {
-    const originalTodoList = [...todoList];
+    const originalTodo = todoList.find(t => t.id === editedTodo.id);
 
-    // Optimistic UI change
     setTodoList(prev => prev.map(t => t.id === editedTodo.id ? editedTodo : t));
 
     try {
@@ -104,10 +102,10 @@ function TodosPage({ token }) {
         body: JSON.stringify({ title: editedTodo.title, isCompleted: editedTodo.isCompleted })
       });
 
-      if (!response.ok) throw new Error('Server rejected edit payload');
+      if (!response.ok) throw new Error('Server rejected edits');
     } catch (err) {
-      setError(`Title edit failed. ${err.message}`);
-      setTodoList(originalTodoList); // Rollback
+      setError(`Todo edit failed. ${err.message}`);
+      setTodoList(prev => prev.map(t => t.id === editedTodo.id ? originalTodo : t));
     }
   };
 
