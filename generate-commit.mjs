@@ -94,7 +94,7 @@ async function generateCommitMessage() {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-		const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
+		const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${geminiKey}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
@@ -102,8 +102,9 @@ async function generateCommitMessage() {
 		});
 
 		clearTimeout(timeoutId);
+    console.log(`Gemini responded with status ${response.status}`);
 		const data = await response.json();
-		if (data.error) throw new Error(data.error.message);
+		if (data.error) throw new Error(`[${data.error.status ?? data.error.code ?? response.status}] ${data.error.message}`);
 
 		let aiMessage = data.candidates[0].content.parts[0].text.trim().replace(/^```\w*\n|\n```$/g, '');
 		if (commitMsgFile) {
@@ -112,7 +113,7 @@ async function generateCommitMessage() {
 		console.log(`✅ Success (via Gemini)!`);
 
 	} catch (primaryErr) {
-		console.warn(`⚠️ Gemini API failed. Trying Groq fallback...`);
+		console.warn(`⚠️ Gemini API failed: ${primaryErr.message}. Trying Groq fallback...`);
 
 		// 4. Secondary Request: Groq
 		if (groqKey) {
@@ -123,13 +124,14 @@ async function generateCommitMessage() {
 				const response = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
-					body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "user", content: prompt }], temperature: 0.2 }),
+					body: JSON.stringify({ model: "openai/gpt-oss-120b", messages: [{ role: "user", content: prompt }], temperature: 0.2 }),
 					signal: fallbackController.signal
 				});
 
 				clearTimeout(fallbackTimeoutId);
+        console.log(`Groq responded with status ${response.status}`);
 				const data = await response.json();
-				if (data.error) throw new Error(data.error.message);
+				if (data.error) throw new Error(`[${data.error.code ?? response.status}] ${data.error.type ?? ''} ${data.error.message}`);
 
 				let aiMessage = data.choices[0].message.content.trim().replace(/^```\w*\n|\n```$/g, '');
 				if (commitMsgFile) {
@@ -137,7 +139,7 @@ async function generateCommitMessage() {
 				}
 				console.log(`✅ Success (via Groq)!`);
 				return;
-			} catch (secondaryErr) { console.error("❌ Groq fallback failed."); }
+			} catch (secondaryErr) { console.error(`❌ Groq fallback failed: ${secondaryErr.message}`); }
 		}
 
 		// 5. Offline Fallback
