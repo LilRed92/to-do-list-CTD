@@ -46,7 +46,7 @@ function TodosPage() {
         dispatch({ type: TODO_ACTIONS.FETCH_SUCCESS, payload: { todos: data.tasks || [] } });
       } catch (err) {
         const isFilterError =
-          Boolean(debouncedFilterTerm) || sortBy !== 'createdAt' || sortDirection !== 'desc';
+          Boolean(debouncedFilterTerm) || sortBy !== 'createdAt' || sortDirection !== 'asc';
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
