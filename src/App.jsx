@@ -1,42 +1,41 @@
-import TodoList from './features/TodoList/TodoList.jsx';
-import TodoForm from './features/TodoForm.jsx';
-import { useState } from 'react'
-import './App.css'
-
+import TodoList from "./features/TodoList/TodoList.jsx";
+import TodoForm from "./features/TodoForm.jsx";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([]);
 
-function addTodo(todoTitle) {
-  const newTodo = {
-    id: Date.now(),
-    title: todoTitle,
-    isCompleted: false,
-  };
+  function addTodo(todoTitle) {
+    const newTodo = {
+      id: Date.now(),
+      title: todoTitle,
+      isCompleted: false,
+    };
 
-setTodoList(previous => [newTodo, ...previous]);
-};
+    setTodoList((previous) => [newTodo, ...previous]);
+  }
 
-function completeTodo(id) {
-    const updatedTodos = todoList.map(todo => {
+  function completeTodo(id) {
+    const updatedTodos = todoList.map((todo) => {
       if (todo.id === id) {
         return { ...todo, isCompleted: true };
       }
       return todo;
     });
 
-  setTodoList(updatedTodos);
-};
+    setTodoList(updatedTodos);
+  }
 
-function updateTodo(editedTodo) {
-  const updatedTodos = todoList.map((todo) => {
-    if (todo.id === editedTodo.id) {
-      return { ...editedTodo };
-    }
-    return todo;
-  });
-  setTodoList(updatedTodos);
-}
+  function updateTodo(editedTodo) {
+    const updatedTodos = todoList.map((todo) => {
+      if (todo.id === editedTodo.id) {
+        return { ...editedTodo };
+      }
+      return todo;
+    });
+    setTodoList(updatedTodos);
+  }
 
   return (
     <div className="to-do">
@@ -51,4 +50,4 @@ function updateTodo(editedTodo) {
   );
 }
 
-export default App
+export default App;
