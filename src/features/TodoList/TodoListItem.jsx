@@ -1,5 +1,5 @@
 import { useEditableTitle } from "../../hooks/useEditableTitle.js";
-import { TextInputWithLabel } from "../../shared/TextInputWithLabel.jsx";
+import TextInputWithLabel from "../../shared/TextInputWithLabel.jsx";
 import { isValidTodoTitle } from "../../utils/todoValidation.js";
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
@@ -18,9 +18,10 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const handleUpdate = (event) => {
     if (!isEditing) return;
     event.preventDefault();
+    if (!isValidTodoTitle(workingTitle)) return;
+
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle });
-    if (!isValidTodoTitle(workingTitle)) return;
   };
 
   return (
