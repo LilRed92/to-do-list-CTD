@@ -12,14 +12,6 @@
   margin-top: 0;
 }
 
-.errorBanner {
-  background-color: var(--error-color);
-  color: var(--error-text-color);
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 4px;
-}
-
 .loadingIndicator {
   font-style: italic;
   color: var(--primary-color);

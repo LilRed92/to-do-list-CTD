@@ -1,0 +1,22 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--error-color);
+  color: var(--error-text-color);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.banner p,
+.banner span {
+  margin: 0;
+}
+
+.warning {
+  background-color: var(--warning-color);
+  color: var(--warning-text-color);
+}

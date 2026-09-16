@@ -13,14 +13,6 @@
   margin-bottom: 1.5rem;
 }
 
-.error {
-  background-color: var(--error-color);
-  color: var(--error-text-color);
-  padding: 0.5rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
 .formGroup {
   margin-bottom: 1rem;
   text-align: left;

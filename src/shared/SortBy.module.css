@@ -12,15 +12,6 @@
   font-size: 0.9rem;
 }
 
-.select {
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Lato', sans-serif;
-}
-
 @media (max-width: 768px) {
   .sortContainer {
     flex-direction: column;

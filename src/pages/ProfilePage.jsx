@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import ErrorBanner from "../shared/ErrorBanner.jsx";
 import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
@@ -67,7 +68,7 @@ function ProfilePage() {
       {loading && (
         <p className={styles.loadingIndicator}>Loading statistics...</p>
       )}
-      {error && <p className={styles.errorBanner}>{error}</p>}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
       {!loading && !error && (
         <div className={styles.statsList}>
           <p>Total: {todoStats.total}</p>

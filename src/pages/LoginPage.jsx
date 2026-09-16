@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { validateEmail, validatePassword } from "../utils/loginValidation.js";
+import ErrorBanner from "../shared/ErrorBanner.jsx";
 
 import styles from "./LoginPage.module.css";
 
@@ -46,7 +47,7 @@ function LoginPage() {
   return (
     <div className={styles.loginContainer}>
       <h2 className={styles.title}>Log On</h2>
-      {authError && <p className={styles.error}>{authError}</p>}
+      {authError && <ErrorBanner>{authError}</ErrorBanner>}
 
       <form onSubmit={handleSubmit} noValidate>
         <div className={styles.formGroup}>

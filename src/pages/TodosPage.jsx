@@ -6,6 +6,7 @@ import TodoList from "../features/Todos/TodoList/TodoList.jsx";
 import SortBy from "../shared/SortBy.jsx";
 import FilterInput from "../shared/FilterInput.jsx";
 import StatusFilter from "../shared/StatusFilter.jsx";
+import ErrorBanner from "../shared/ErrorBanner.jsx";
 import useDebounce from "../utils/useDebounce.js";
 import {
   todoReducer,
@@ -182,7 +183,7 @@ function TodosPage() {
   return (
     <div className={styles.todosContainer}>
       {error && (
-        <div className={styles.errorBanner}>
+        <ErrorBanner>
           <span>{error}</span>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
@@ -190,14 +191,11 @@ function TodosPage() {
           >
             Clear Error
           </button>
-        </div>
+        </ErrorBanner>
       )}
 
       {filterError && (
-        <div
-          className={styles.errorBanner}
-          style={{ backgroundColor: "var(--accent-2)", color: "#fff" }}
-        >
+        <ErrorBanner variant="warning">
           <p>{filterError}</p>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
@@ -208,11 +206,10 @@ function TodosPage() {
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
             className={styles.clearErrorBtn}
-            style={{ marginLeft: "10px" }}
           >
             Reset Filters
           </button>
-        </div>
+        </ErrorBanner>
       )}
 
       {isTodoListLoading && (

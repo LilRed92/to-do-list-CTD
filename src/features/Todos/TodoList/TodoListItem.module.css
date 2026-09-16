@@ -39,14 +39,44 @@
 }
 
 .checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent-2);
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
   cursor: pointer;
+}
+
+.customCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox:checked ~ .customCheck {
+  background-color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.checkbox:checked ~ .customCheck::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  margin-bottom: 2px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .todoText {
   flex: 1;
+  min-width: 0;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 4px;

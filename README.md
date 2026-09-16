@@ -8,19 +8,22 @@ To Do List is a clean, lightweight React-based web application designed to help 
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 
-[![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black)](https://github.com/motdotla/dotenv) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/) [![Husky](https://img.shields.io/badge/Husky-black?style=for-the-badge&logo=git&logoColor=white)](https://typicode.github.io/husky/) [![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://netlify.com/)
+[![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black)](https://github.com/motdotla/dotenv) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/) [![Husky](https://img.shields.io/badge/Husky-black?style=for-the-badge&logo=git&logoColor=white)](https://typicode.github.io/husky/) [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
 ## 🔗 Live Demo
 *Link to deployed application on Vercel will go here.*
 
 ## ✨ Features
 
-- **Dynamic Task Dashboard**: View a clean, list-rendered interface containing essential workflow milestones.
-- **State Management Foundations**: Configured with React `useState` and `useReducer` hooks to pave the way for interactive, client-side item updates.
-- **Theme Toggle**: Switch between Light Mode and Dark Mode for improved accessibility and user preference.
-- **Client-Side Validation**: Secure and validated form inputs to ensure data integrity and prevent overly long task titles.
-- **Automated Developer Git Hooks**: Includes native Husky integration that automates execution permissions and structures clean development cycles.
-- **Fast Build Times**: Powered by Vite and ESModules for ultra-fast Hot Module Replacement (HMR).
+- **User Authentication**: Login and logout with CSRF-token-based session auth, with protected routes for authenticated users only.
+- **Full Todo Management**: Create, edit, complete, and delete todos, with non-optimistic delete handling to avoid accidental data loss.
+- **Search, Sort & Filter**: Search todos by title, filter by status (All/Active/Completed), and sort by creation date or title.
+- **Theme Toggle**: Switch between Light Mode and Dark Mode, with the preference saved across sessions.
+- **Responsive Design**: Mobile-friendly layout with a stacking header/nav and touch-friendly controls down to small screens.
+- **Accessible by Design**: Visible focus states and minimum 44px touch targets on interactive elements.
+- **Client-Side Validation**: Field-level validation on login and todo forms to prevent empty or overly long submissions.
+- **Continuous Integration**: Automated linting and build checks on every push and pull request via GitHub Actions.
+- **AI-Assisted Dev Workflow**: Automated commit message and PR description generation powered by Gemini.
 
 ## 💻 Technologies Used
 
@@ -33,7 +36,7 @@ To Do List is a clean, lightweight React-based web application designed to help 
 **Tooling & Dev Ecosystem:**
 - ESLint for styling validation and code quality checking
 - Husky for Git hooks management
-- Dotenv for handling secure frontend environments
+- Dotenv for loading local environment variables used by dev-tooling scripts (commit message and PR description generation)
 
 ## 📸 Screenshots
 
@@ -48,13 +51,13 @@ _(Replace these placeholder links with actual paths to your screenshots/gifs onc
 Follow these steps to get the development environment running on your machine:
 
 ### Prerequisites
-- Node.js (v18 or higher recommended)
+- Node.js (`^20.19.0` or `>=22.12.0`, per the Vite/ESLint version requirements in `package.json`)
 - npm or yarn
 
 ### Clone the repository
 ```bash
-git clone https://github.com/LilRed92/to-do-list-ctd.git
-cd to-do-list-ctd
+git clone https://github.com/LilRed92/to-do-list-CTD.git
+cd to-do-list-CTD
 ```
 
 ### Install Dependencies
@@ -78,13 +81,22 @@ npm install
 
 ## 🔌 API Reference
 
-This application is currently run as a client-side interface using local component states alongside a backend proxy. The client parses dynamic tasks using the following schema:
+Todos are fully persisted through a REST API, proxied via `vercel.json` to the production backend. The client authenticates with a CSRF token (sent as `X-CSRF-TOKEN`) and calls:
 
-| Local Data Property | Type              | Description                                                      |
-| ------------------- | ----------------- | ---------------------------------------------------------------- |
-| `id`                | `Number`          | Unique task identifier.                                          |
-| `title`             | `String`          | Description of the task to complete (Max 100 chars).             |
-| `isCompleted`       | `Boolean`         | Status of the task.                                              |
+| Method   | Endpoint          | Description                     |
+| -------- | ----------------- | -------------------------------- |
+| `GET`    | `/api/tasks`       | Fetch todos (supports sort/filter query params). |
+| `POST`   | `/api/tasks`       | Create a new todo.               |
+| `PATCH`  | `/api/tasks/:id`   | Update or complete a todo.        |
+| `DELETE` | `/api/tasks/:id`   | Delete a todo.                    |
+
+Each task uses the following schema:
+
+| Data Property | Type      | Description                                            |
+| -------------- | --------- | ------------------------------------------------------- |
+| `id`           | `Number`  | Unique task identifier.                                  |
+| `title`        | `String`  | Description of the task to complete (Max 100 chars).     |
+| `isCompleted`  | `Boolean` | Status of the task.                                      |
 
 ## 🌍 Deployment
 
