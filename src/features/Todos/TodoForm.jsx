@@ -10,7 +10,7 @@ function TodoForm ({ onAddTodo }) {
         event.preventDefault();
 
         if (isValidTodoTitle(workingTodoTitle)) {
-            onAddTodo(workingTodoTitle);
+            onAddTodo(workingTodoTitle.trim());
             setWorkingTodoTitle("");
         }
     };

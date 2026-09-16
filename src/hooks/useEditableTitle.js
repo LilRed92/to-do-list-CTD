@@ -20,7 +20,7 @@ export function useEditableTitle(initialTitle) {
 
   const finishEdit = () => {
     setIsEditing(false);
-    return workingTitle;
+    return workingTitle.trim();
   };
 
   return {

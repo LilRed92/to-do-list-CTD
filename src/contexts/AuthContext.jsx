@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
         success: false,
         error: `Authentication failed: ${data?.message || 'Invalid Credentials'}`,
       };
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Network error during login' };
     }
   };
@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
 
       if (response.ok) return { success: true };
       return { success: false, error: 'Logout request failed, but you have been logged out locally.' };
-    } catch (error) {
+    } catch {
       setEmail('');
       setToken('');
       return { success: false, error: 'Network error during logout' };

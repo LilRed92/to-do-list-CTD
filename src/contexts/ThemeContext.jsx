@@ -13,7 +13,7 @@ export function useTheme() {
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("app-theme");
-    return savedTheme || "light";
+    return savedTheme || "dark";
   });
 
   useEffect(() => {
@@ -31,5 +31,3 @@ export function ThemeProvider({ children }) {
     </ThemeContext.Provider>
   );
 }
-
-
