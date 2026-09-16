@@ -1,0 +1,56 @@
+.todosContainer {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.searchRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.errorBanner {
+  background-color: var(--error-color);
+  color: var(--text-color);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clearErrorBtn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.loadingIndicator {
+  font-style: italic;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}

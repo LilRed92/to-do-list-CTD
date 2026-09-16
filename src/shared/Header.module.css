@@ -1,0 +1,34 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--surface-color);
+  border-bottom: 2px solid var(--border-color);
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle {
+  background-color: var(--accent-1);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.themeToggle:hover {
+  background-color: var(--accent-2);
+}

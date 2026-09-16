@@ -1,0 +1,29 @@
+.formContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.addBtn {
+  background-color: var(--accent-1);
+  color: #fff;
+  border: 1px solid var(--accent-1);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  line-height: inherit;
+  box-sizing: border-box;
+}
+
+.addBtn:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}

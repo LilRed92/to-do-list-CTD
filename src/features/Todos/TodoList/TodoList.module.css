@@ -1,0 +1,13 @@
+.todoUl {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.emptyMessage {
+  text-align: center;
+  color: var(--border-color);
+  font-style: italic;
+  padding: 2rem 0;
+}

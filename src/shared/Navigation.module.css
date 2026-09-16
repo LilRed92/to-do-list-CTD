@@ -1,0 +1,24 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--secondary-color);
+}
+
+.navLinkActive {
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: underline;
+}

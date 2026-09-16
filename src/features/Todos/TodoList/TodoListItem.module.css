@@ -1,0 +1,89 @@
+.listItem {
+  list-style: none;
+  background-color: var(--surface-color);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem; /* Shortened padding */
+  border-radius: 8px;
+  border-left: 8px solid var(--secondary-color); /* Berry Lipstick for non-completed */
+  transition: all 0.3s ease;
+}
+
+.completed {
+  border-left-color: var(--accent-2); /* Green for completed */
+  opacity: 0.8;
+}
+
+.completed .todoText {
+  text-decoration: line-through;
+  color: var(--border-color);
+}
+
+.itemForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.viewMode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-2);
+  cursor: pointer;
+}
+
+.todoText {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.todoText:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .todoText:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.editMode {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cancelBtn {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.updateBtn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
