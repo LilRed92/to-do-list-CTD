@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
   const { email, token } = useAuth();
@@ -57,16 +58,18 @@ function ProfilePage() {
       : 0;
 
   return (
-    <div>
-      <h2>Your Profile</h2>
+    <div className={styles.profileContainer}>
+      <h2 className={styles.title}>Your Profile</h2>
       <p>Name: {email}</p>
       <p>Status: Logged In</p>
 
       <h3>Todo Statistics</h3>
-      {loading && <p>Loading statistics...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading && (
+        <p className={styles.loadingIndicator}>Loading statistics...</p>
+      )}
+      {error && <p className={styles.errorBanner}>{error}</p>}
       {!loading && !error && (
-        <div>
+        <div className={styles.statsList}>
           <p>Total: {todoStats.total}</p>
           <p>Completed: {todoStats.completed}</p>
           <p>Active: {todoStats.active}</p>

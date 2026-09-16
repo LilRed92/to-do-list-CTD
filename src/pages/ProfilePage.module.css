@@ -1,0 +1,37 @@
+.profileContainer {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.title {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+
+.errorBanner {
+  background-color: var(--error-color);
+  color: var(--text-color);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.loadingIndicator {
+  font-style: italic;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statsList p {
+  margin: 0;
+}

@@ -1,7 +1,9 @@
+import styles from "./AboutPage.module.css";
+
 function AboutPage() {
   return (
-    <div>
-      <h2>About This App</h2>
+    <div className={styles.aboutContainer}>
+      <h2 className={styles.title}>About This App</h2>
       <p>
         This is a todo list app for creating, sorting, filtering, and completing
         tasks. Todos are saved to a server so they persist across sessions.

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import { validateEmail, validatePassword } from "../utils/loginValidation.js";
 
 import styles from "./LoginPage.module.css";
 
@@ -12,6 +13,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({ email: "", password: "" });
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
   const from = location.state?.from?.pathname || "/todos";
@@ -24,10 +26,16 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoggingOn(true);
     setAuthError("");
 
-    const result = await login(email, password);
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+    setFieldErrors({ email: emailError, password: passwordError });
+
+    if (emailError || passwordError) return;
+
+    setIsLoggingOn(true);
+    const result = await login(email.trim(), password);
     if (!result.success) {
       setAuthError(result.error);
     }
@@ -40,7 +48,7 @@ function LoginPage() {
       <h2 className={styles.title}>Log On</h2>
       {authError && <p className={styles.error}>{authError}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email</label>
           <input
@@ -48,9 +56,11 @@ function LoginPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
             maxLength={100}
           />
+          {fieldErrors.email && (
+            <p className={styles.fieldError}>{fieldErrors.email}</p>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">Password</label>
@@ -59,9 +69,11 @@ function LoginPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
             maxLength={100}
           />
+          {fieldErrors.password && (
+            <p className={styles.fieldError}>{fieldErrors.password}</p>
+          )}
         </div>
         <button type="submit" className={styles.submitBtn} disabled={isLoggingOn}>
           {isLoggingOn ? "Logging in..." : "Log On"}
