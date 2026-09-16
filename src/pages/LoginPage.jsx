@@ -1,17 +1,29 @@
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.jsx';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
-function Logon() {
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [authError, setAuthError] = useState('');
+function LoginPage() {
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
+
+  const from = location.state?.from?.pathname || "/todos";
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, from]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoggingOn(true);
-    setAuthError('');
+    setAuthError("");
 
     const result = await login(email, password);
     if (!result.success) {
@@ -24,7 +36,7 @@ function Logon() {
   return (
     <div className="logon-container">
       <h2>Log On</h2>
-      {authError && <p style={{ color: 'red' }}>{authError}</p>}
+      {authError && <p style={{ color: "red" }}>{authError}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -48,11 +60,11 @@ function Logon() {
           />
         </div>
         <button type="submit" disabled={isLoggingOn}>
-          {isLoggingOn ? 'Logging in...' : 'Log On'}
+          {isLoggingOn ? "Logging in..." : "Log On"}
         </button>
       </form>
     </div>
   );
 }
 
-export default Logon;
+export default LoginPage;
