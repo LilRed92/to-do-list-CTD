@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
 import { isValidTodoTitle } from '../../utils/todoValidation.js';
+import { sanitizeText } from '../../utils/sanitizeText.js';
 import styles from './TodoForm.module.css';
 
 function TodoForm ({ onAddTodo }) {
@@ -10,7 +11,7 @@ function TodoForm ({ onAddTodo }) {
         event.preventDefault();
 
         if (isValidTodoTitle(workingTodoTitle)) {
-            onAddTodo(workingTodoTitle.trim());
+            onAddTodo(sanitizeText(workingTodoTitle));
             setWorkingTodoTitle("");
         }
     };

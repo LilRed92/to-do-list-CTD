@@ -23,4 +23,9 @@
 .navLinks a {
   color: var(--primary-color);
   font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--secondary-color);
 }

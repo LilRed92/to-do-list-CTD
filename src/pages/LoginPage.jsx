@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { validateEmail, validatePassword } from "../utils/loginValidation.js";
+import { sanitizeText } from "../utils/sanitizeText.js";
 import ErrorBanner from "../shared/ErrorBanner.jsx";
 
 import styles from "./LoginPage.module.css";
@@ -36,7 +37,7 @@ function LoginPage() {
     if (emailError || passwordError) return;
 
     setIsLoggingOn(true);
-    const result = await login(email.trim(), password);
+    const result = await login(sanitizeText(email), password);
     if (!result.success) {
       setAuthError(result.error);
     }
