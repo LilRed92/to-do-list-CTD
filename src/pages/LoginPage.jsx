@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
+import styles from "./LoginPage.module.css";
+
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -34,12 +36,12 @@ function LoginPage() {
   };
 
   return (
-    <div className="logon-container">
-      <h2>Log On</h2>
-      {authError && <p style={{ color: "red" }}>{authError}</p>}
+    <div className={styles.loginContainer}>
+      <h2 className={styles.title}>Log On</h2>
+      {authError && <p className={styles.error}>{authError}</p>}
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -47,9 +49,10 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            maxLength={100}
           />
         </div>
-        <div>
+        <div className={styles.formGroup}>
           <label htmlFor="password">Password</label>
           <input
             id="password"
@@ -57,9 +60,10 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            maxLength={100}
           />
         </div>
-        <button type="submit" disabled={isLoggingOn}>
+        <button type="submit" className={styles.submitBtn} disabled={isLoggingOn}>
           {isLoggingOn ? "Logging in..." : "Log On"}
         </button>
       </form>

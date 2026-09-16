@@ -12,6 +12,7 @@ import {
   initialTodoState,
   TODO_ACTIONS,
 } from "../reducers/todoReducer.js";
+import styles from "./TodosPage.module.css";
 
 function TodosPage() {
   const { token } = useAuth();
@@ -159,16 +160,13 @@ function TodosPage() {
   };
 
   return (
-    <div className="todos-page-layout">
+    <div className={styles.todosContainer}>
       {error && (
-        <div
-          className="error-banner"
-          style={{ background: "#ffcccc", padding: "10px", margin: "10px 0" }}
-        >
+        <div className={styles.errorBanner}>
           <span>{error}</span>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
-            style={{ marginLeft: "15px" }}
+            className={styles.clearErrorBtn}
           >
             Clear Error
           </button>
@@ -176,18 +174,17 @@ function TodosPage() {
       )}
 
       {filterError && (
-        <div
-          className="filter-error-banner"
-          style={{ background: "#fff3cd", padding: "10px", margin: "10px 0" }}
-        >
+        <div className={styles.errorBanner} style={{ backgroundColor: "var(--accent-2)", color: "#fff" }}>
           <p>{filterError}</p>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
+            className={styles.clearErrorBtn}
           >
             Clear Filter Error
           </button>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
+            className={styles.clearErrorBtn}
             style={{ marginLeft: "10px" }}
           >
             Reset Filters
@@ -196,37 +193,43 @@ function TodosPage() {
       )}
 
       {isTodoListLoading && (
-        <p className="loading-indicator">
+        <p className={styles.loadingIndicator}>
           Syncing data with server database...
         </p>
       )}
 
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={(newSortBy) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: { sortBy: newSortBy, sortDirection },
-          })
-        }
-        onSortDirectionChange={(newDirection) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: { sortBy, sortDirection: newDirection },
-          })
-        }
-      />
-      <StatusFilter />
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={(newTerm) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_FILTER,
-            payload: { filterTerm: newTerm },
-          })
-        }
-      />
+      <div className={styles.controlsRow}>
+        <SortBy
+          sortBy={sortBy}
+          sortDirection={sortDirection}
+          onSortByChange={(newSortBy) =>
+            dispatch({
+              type: TODO_ACTIONS.SET_SORT,
+              payload: { sortBy: newSortBy, sortDirection },
+            })
+          }
+          onSortDirectionChange={(newDirection) =>
+            dispatch({
+              type: TODO_ACTIONS.SET_SORT,
+              payload: { sortBy, sortDirection: newDirection },
+            })
+          }
+        />
+        <StatusFilter />
+      </div>
+
+      <div className={styles.searchRow}>
+        <FilterInput
+          filterTerm={filterTerm}
+          onFilterChange={(newTerm) =>
+            dispatch({
+              type: TODO_ACTIONS.SET_FILTER,
+              payload: { filterTerm: newTerm },
+            })
+          }
+        />
+      </div>
+
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
