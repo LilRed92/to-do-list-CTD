@@ -1,6 +1,8 @@
+import styles from "./FilterInput.module.css";
+
 function FilterInput({ filterTerm, onFilterChange }) {
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <label htmlFor="filterInput">Search todos:</label>
       <input
         id="filterInput"
@@ -8,6 +10,7 @@ function FilterInput({ filterTerm, onFilterChange }) {
         value={filterTerm}
         onChange={(e) => onFilterChange(e.target.value)}
         placeholder="Search by title..."
+        className={styles.filterInput}
         />
     </div>
   );

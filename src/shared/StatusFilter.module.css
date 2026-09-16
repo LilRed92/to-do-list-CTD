@@ -1,0 +1,19 @@
+.statusContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statusContainer label {
+  font-weight: bold;
+}
+
+.select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Lato', sans-serif;
+}
