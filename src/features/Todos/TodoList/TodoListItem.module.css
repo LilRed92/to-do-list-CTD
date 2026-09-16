@@ -87,3 +87,11 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
 }
+
+.deleteBtn {
+  background-color: var(--error-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}

@@ -130,6 +130,26 @@ function TodosPage() {
     }
   };
 
+  const deleteTodo = async (id) => {
+    dispatch({ type: TODO_ACTIONS.DELETE_TODO_START });
+
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: { "X-CSRF-TOKEN": token },
+        credentials: "include",
+      });
+
+      if (!response.ok) throw new Error("Server rejected deletion");
+      dispatch({ type: TODO_ACTIONS.DELETE_TODO_SUCCESS, payload: { id } });
+    } catch (err) {
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: { message: `Failed to delete todo. ${err.message}` },
+      });
+    }
+  };
+
   const updateTodo = async (editedTodo) => {
     const originalTodo = todoList.find((t) => t.id === editedTodo.id);
     dispatch({ type: TODO_ACTIONS.UPDATE_TODO_START, payload: { editedTodo } });
@@ -174,7 +194,10 @@ function TodosPage() {
       )}
 
       {filterError && (
-        <div className={styles.errorBanner} style={{ backgroundColor: "var(--accent-2)", color: "#fff" }}>
+        <div
+          className={styles.errorBanner}
+          style={{ backgroundColor: "var(--accent-2)", color: "#fff" }}
+        >
           <p>{filterError}</p>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
@@ -235,6 +258,7 @@ function TodosPage() {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        onDeleteTodo={deleteTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
       />
