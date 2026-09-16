@@ -9,8 +9,10 @@
   --border-color: #555555;
   --error-color: #990000;
   --error-text-color: #fff;
-  --warning-color: var(--accent-2);
-  --warning-text-color: #000;
+  --warning-color: var(--accent-1);
+  --warning-text-color: #fff;
+  --delete-color: #800000;
+  --delete-color-active: #ff1f1f;
 }
 
 [data-theme="light"] {
@@ -69,6 +71,7 @@ button {
 button:hover:not(:disabled) {
   opacity: 0.9;
   transform: translateY(-1px);
+  filter: brightness(1.12);
 }
 
 button:active:not(:disabled) {

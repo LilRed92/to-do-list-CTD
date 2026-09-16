@@ -1,0 +1,126 @@
+.about-container {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 700px;
+}
+
+.about-title {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+
+.about-container ul {
+  padding-left: 1.25rem;
+}
+
+.about-container li {
+  margin-bottom: 0.35rem;
+}
+
+.about-badge-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin: 0.75rem 0 0.5rem;
+  padding: 1rem;
+}
+
+.about-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 16px;
+  font-family: 'Lato', sans-serif;
+}
+
+.about-badge-label {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.about-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.about-badge-lg {
+  padding: 0.75rem 1rem;
+}
+
+.about-badge-lg .about-badge-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1rem;
+}
+
+.about-badge-lg .about-badge-label {
+  font-size: 0.75rem;
+}
+
+.about-badge-md {
+  padding: 0.6rem 0.85rem;
+}
+
+.about-badge-md .about-badge-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  font-size: 0.85rem;
+}
+
+.about-badge-md .about-badge-label {
+  font-size: 0.68rem;
+}
+
+.about-badge-sm {
+  padding: 0.5rem 0.7rem;
+}
+
+.about-badge-sm .about-badge-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 0.7rem;
+}
+
+.about-badge-sm .about-badge-label {
+  font-size: 0.62rem;
+}
+
+.about-badge-react {
+  background-color: #61dafb;
+  color: #000;
+}
+
+.about-badge-vite {
+  background-color: #646cff;
+  color: #fff;
+}
+
+.about-badge-js {
+  background-color: #f7df1e;
+  color: #000;
+}
+
+.about-badge-router {
+  background-color: #ca4245;
+  color: #fff;
+}
+
+.about-badge-css {
+  background-color: #264de4;
+  color: #fff;
+}
+
+.about-badge-vercel {
+  background-color: #000;
+  color: #fff;
+}

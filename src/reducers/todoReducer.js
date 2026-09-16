@@ -22,14 +22,11 @@ export const TODO_ACTIONS = {
   SET_SORT: "SET_SORT",
   SET_FILTER: "SET_FILTER",
   CLEAR_ERROR: "CLEAR_ERROR",
-  CLEAR_FILTER_ERROR: "CLEAR_FILTER_ERROR",
-  RESET_FILTERS: "RESET_FILTERS",
 };
 
 export const initialTodoState = {
   todoList: [],
   error: "",
-  filterError: "",
   isTodoListLoading: true,
   sortBy: "createdAt",
   sortDirection: "asc",
@@ -44,7 +41,6 @@ export function todoReducer(state, action) {
         ...state,
         isTodoListLoading: true,
         error: "",
-        filterError: "",
       };
 
     case TODO_ACTIONS.FETCH_SUCCESS:
@@ -52,15 +48,13 @@ export function todoReducer(state, action) {
         ...state,
         todoList: action.payload.todos,
         isTodoListLoading: false,
-        filterError: "",
       };
 
     case TODO_ACTIONS.FETCH_ERROR:
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload.isFilterError ? "" : action.payload.message,
-        filterError: action.payload.isFilterError ? action.payload.message : "",
+        error: action.payload.message,
       };
 
     case TODO_ACTIONS.ADD_TODO_START:
@@ -90,7 +84,9 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: state.todoList.map((t) =>
-          t.id === action.payload.id ? { ...t, isCompleted: true } : t,
+          t.id === action.payload.id
+            ? { ...t, isCompleted: action.payload.isCompleted }
+            : t,
         ),
       };
 
@@ -160,18 +156,6 @@ export function todoReducer(state, action) {
 
     case TODO_ACTIONS.CLEAR_ERROR:
       return { ...state, error: "" };
-
-    case TODO_ACTIONS.CLEAR_FILTER_ERROR:
-      return { ...state, filterError: "" };
-
-    case TODO_ACTIONS.RESET_FILTERS:
-      return {
-        ...state,
-        filterTerm: "",
-        sortBy: "createdAt",
-        sortDirection: "asc",
-        filterError: "",
-      };
 
     default:
       throw new Error(`Unknown action type: ${action.type}`);

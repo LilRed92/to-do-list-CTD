@@ -40,14 +40,16 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
       <form onSubmit={handleUpdate} className={styles.itemForm}>
         {isEditing ? (
           <div className={styles.editMode}>
-            <TextInputWithLabel
-              elementId={`edit-todo-${todo.id}`}
-              labelText="Edit Todo"
-              value={workingTitle}
-              onChange={handleEdit}
-              maxLength={100}
-              required={true}
-            />
+            <div className={styles.editInputWrapper}>
+              <TextInputWithLabel
+                elementId={`edit-todo-${todo.id}`}
+                labelText="Edit Todo"
+                value={workingTitle}
+                onChange={handleEdit}
+                maxLength={100}
+                required={true}
+              />
+            </div>
             <div className={styles.editActions}>
               <button
                 type="button"

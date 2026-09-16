@@ -63,6 +63,9 @@ function LoginPage() {
           {fieldErrors.email && (
             <p className={styles.fieldError}>{fieldErrors.email}</p>
           )}
+          {email.length >= 100 && (
+            <p className={styles.limitMessage}>Maximum length reached (100 characters).</p>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">Password</label>
@@ -75,6 +78,9 @@ function LoginPage() {
           />
           {fieldErrors.password && (
             <p className={styles.fieldError}>{fieldErrors.password}</p>
+          )}
+          {password.length >= 100 && (
+            <p className={styles.limitMessage}>Maximum length reached (100 characters).</p>
           )}
         </div>
         <button type="submit" className={styles.submitBtn} disabled={isLoggingOn}>

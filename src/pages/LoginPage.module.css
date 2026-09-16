@@ -35,8 +35,18 @@
 }
 
 .fieldError {
-  color: var(--error-color);
+  background-color: var(--error-color);
+  color: var(--error-text-color);
   font-size: 0.85rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  margin: 0.35rem 0 0;
+}
+
+.limitMessage {
+  color: var(--border-color);
+  font-size: 0.8rem;
+  font-style: italic;
   margin: 0.35rem 0 0;
 }
 

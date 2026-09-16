@@ -12,6 +12,7 @@
   border-radius: 8px;
   font-weight: bold;
   font-size: 0.85rem;
+  min-height: 36px;
 }
 
 .logoffBtn:hover:not(:disabled) {

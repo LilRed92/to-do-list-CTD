@@ -97,13 +97,20 @@
 
 .editMode {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
   width: 100%;
+}
+
+.editInputWrapper {
+  flex: 1;
+  min-width: 0;
 }
 
 .editActions {
   display: flex;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .cancelBtn {
@@ -112,6 +119,7 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  min-height: 36px;
 }
 
 .updateBtn {
@@ -120,12 +128,18 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  min-height: 36px;
 }
 
 .deleteBtn {
-  background-color: var(--error-color);
+  background-color: var(--delete-color);
   color: var(--error-text-color);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+}
+
+.deleteBtn:hover:not(:disabled),
+.deleteBtn:active:not(:disabled) {
+  background-color: var(--delete-color-active);
 }

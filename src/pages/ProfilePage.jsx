@@ -60,21 +60,34 @@ function ProfilePage() {
 
   return (
     <div className={styles.profileContainer}>
-      <h2 className={styles.title}>Your Profile</h2>
-      <p>Name: {email}</p>
-      <p>Status: Logged In</p>
+      <div className={styles.headerRow}>
+        <h2 className={styles.title}>{email}'s Profile</h2>
+        <span className={styles.statusBadge}>Logged In</span>
+      </div>
 
-      <h3>Todo Statistics</h3>
+      <h3 className={styles.statsHeading}>📊 Todo Statistics</h3>
       {loading && (
         <p className={styles.loadingIndicator}>Loading statistics...</p>
       )}
       {error && <ErrorBanner>{error}</ErrorBanner>}
       {!loading && !error && (
         <div className={styles.statsList}>
-          <p>Total: {todoStats.total}</p>
-          <p>Completed: {todoStats.completed}</p>
-          <p>Active: {todoStats.active}</p>
-          {todoStats.total > 0 && <p>Completion: {completionPercentage}%</p>}
+          <div className={styles.statsRow}>
+            <p>Total: {todoStats.total}</p>
+            <p>Completed: {todoStats.completed}</p>
+            <p>Active: {todoStats.active}</p>
+          </div>
+          {todoStats.total > 0 && (
+            <div className={styles.completionSection}>
+              <p>Completion: {completionPercentage}%</p>
+              <div className={styles.progressTrack}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${completionPercentage}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

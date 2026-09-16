@@ -7,11 +7,19 @@ function TextInputWithLabel({
     ref,
     value,
     maxLength,
-    required
+    required,
+    placeholder
   }) {
+    const isAtLimit = Boolean(maxLength) && (value?.length || 0) >= maxLength;
+
     return (
       <div className={styles.inputGroup}>
         <label htmlFor={elementId} className={styles.label}>{labelText}</label>
+        {isAtLimit && (
+          <p className={styles.limitMessage}>
+            Maximum length reached ({maxLength} characters).
+          </p>
+        )}
         <input
           type="text"
           id={elementId}
@@ -20,6 +28,7 @@ function TextInputWithLabel({
           onChange={onChange}
           maxLength={maxLength}
           required={required}
+          placeholder={placeholder}
           className={styles.input}
         />
       </div>

@@ -4,8 +4,8 @@ import selectStyles from "./Select.module.css";
 function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange }) {
 
   return(
-    <div className={styles.sortContainer}>
-      <label htmlFor="sortBy">
+    <>
+      <label htmlFor="sortBy" className={styles.selectLabel}>
           Sort by
           <select
               id="sortBy"
@@ -19,7 +19,7 @@ function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange 
           </select>
         </label>
 
-        <label htmlFor="sortDirection">
+        <label htmlFor="sortDirection" className={styles.selectLabel}>
           Order
           <select
               id="sortDirection"
@@ -32,7 +32,7 @@ function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange 
                 <option value="asc">Ascending</option>
           </select>
         </label>
-    </div>
+    </>
   );
 }
 

@@ -1,19 +1,7 @@
-.sortContainer {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.sortContainer label {
+.selectLabel {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   font-weight: bold;
   font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .sortContainer {
-    flex-direction: column;
-  }
 }

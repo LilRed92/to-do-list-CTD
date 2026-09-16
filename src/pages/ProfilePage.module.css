@@ -1,15 +1,40 @@
 .profileContainer {
   background-color: var(--surface-color);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
   max-width: 600px;
+  line-height: 1.7;
 }
 
 .title {
   color: var(--primary-color);
-  margin-top: 0;
+  margin: 0;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.statsHeading {
+  margin-bottom: 1.25rem;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background-color: var(--accent-2);
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .loadingIndicator {
@@ -21,9 +46,36 @@
 .statsList {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
-.statsList p {
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.statsRow p {
   margin: 0;
+}
+
+.completionSection p {
+  margin: 0 0 0.35rem;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 22px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--accent-2);
+  border-radius: 999px;
+  transition: width 0.3s ease;
 }

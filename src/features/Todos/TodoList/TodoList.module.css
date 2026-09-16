@@ -11,3 +11,11 @@
   font-style: italic;
   padding: 2rem 0;
 }
+
+.noSearchResults {
+  text-align: center;
+  color: var(--accent-1);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 2rem 0;
+}
