@@ -8,6 +8,7 @@
   --accent-2: #3F9B0B;
   --border-color: #555555;
   --error-color: #990000;
+  --error-text-color: #fff;
 }
 
 [data-theme="light"] {
@@ -16,6 +17,7 @@
   --surface-color: #dbdbdb;
   --border-color: #999999;
   --error-color: #990000;
+  --error-text-color: #000;
 }
 
 body {

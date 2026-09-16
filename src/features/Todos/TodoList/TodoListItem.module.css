@@ -90,7 +90,7 @@
 
 .deleteBtn {
   background-color: var(--error-color);
-  color: #fff;
+  color: var(--error-text-color);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
