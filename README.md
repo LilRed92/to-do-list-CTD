@@ -49,7 +49,11 @@ _Link to deployed application on Vercel will go here._
 
 ## 🎬 Walkthrough
 
-<video src="https://youtu.be/fxw-WIzjrgM" controls alt="Walkthrough" width="1000" height="auto"></video>
+<p align="center" style="padding: 15px;">
+  <a href="https://youtu.be/fxw-WIzjrgM" target="_blank">
+    <img src="/src/assets/video_screenshot.png" alt="Watch Video Demo" width="800" style="display: block;">
+  </a>
+</p>
 
 ## 🚀 Getting Started
 
