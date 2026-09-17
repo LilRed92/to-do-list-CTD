@@ -1,0 +1,10 @@
+.statusContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statusContainer label {
+  font-weight: bold;
+}

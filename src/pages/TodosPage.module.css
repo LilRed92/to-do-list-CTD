@@ -1,0 +1,58 @@
+.todosContainer {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .metaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.errorMessage {
+  color: var(--error-color);
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.clearErrorLink {
+  background: none;
+  border: none;
+  color: var(--error-color);
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0;
+  min-height: auto;
+  min-width: auto;
+  cursor: pointer;
+}
+
+.loadingIndicator {
+  font-style: italic;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}

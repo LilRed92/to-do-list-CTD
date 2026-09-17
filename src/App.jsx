@@ -1,51 +1,43 @@
-import TodoList from "./features/TodoList/TodoList.jsx";
-import TodoForm from "./features/TodoForm.jsx";
-import { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
+import { Routes, Route } from "react-router";
+// Page Imports
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import LoginPage from "./pages/LoginPage";
+import TodosPage from "./pages/TodosPage";
+import ProfilePage from "./pages/ProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import RequireAuth from "./components/RequireAuth";
+import Header from "./shared/Header.jsx";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-
-  function addTodo(todoTitle) {
-    const newTodo = {
-      id: Date.now(),
-      title: todoTitle,
-      isCompleted: false,
-    };
-
-    setTodoList((previous) => [newTodo, ...previous]);
-  }
-
-  function completeTodo(id) {
-    const updatedTodos = todoList.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, isCompleted: true };
-      }
-      return todo;
-    });
-
-    setTodoList(updatedTodos);
-  }
-
-  function updateTodo(editedTodo) {
-    const updatedTodos = todoList.map((todo) => {
-      if (todo.id === editedTodo.id) {
-        return { ...editedTodo };
-      }
-      return todo;
-    });
-    setTodoList(updatedTodos);
-  }
-
   return (
-    <div className="to-do">
-      <h1>Todo List</h1>
-      <TodoForm onAddTodo={addTodo} />
-      <TodoList
-        todoList={todoList}
-        onCompleteTodo={completeTodo}
-        onUpdateTodo={updateTodo}
-      />
+    <div className={styles.appContainer}>
+      <Header />
+      <main className={styles.mainContent}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/todos"
+            element={
+              <RequireAuth>
+                <TodosPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }

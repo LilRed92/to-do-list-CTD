@@ -1,0 +1,26 @@
+.logoffContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoffBtn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  min-height: 36px;
+}
+
+.logoffBtn:hover:not(:disabled) {
+  background-color: var(--accent-2);
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin: 0;
+}

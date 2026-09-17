@@ -1,0 +1,31 @@
+.notFoundContainer {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 4rem auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.title {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.navLinks a {
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--secondary-color);
+}

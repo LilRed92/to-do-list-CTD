@@ -1,0 +1,145 @@
+.listItem {
+  list-style: none;
+  background-color: var(--surface-color);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem; /* Shortened padding */
+  border-radius: 8px;
+  border-left: 8px solid var(--secondary-color); /* Berry Lipstick for non-completed */
+  transition: all 0.3s ease;
+}
+
+.completed {
+  border-left-color: var(--accent-2); /* Green for completed */
+  opacity: 0.8;
+}
+
+.completed .todoText {
+  text-decoration: line-through;
+  color: var(--border-color);
+}
+
+.itemForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.viewMode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.customCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkboxLabel:hover .customCheck {
+  border-color: var(--accent-2);
+}
+
+.checkbox:checked ~ .customCheck {
+  background-color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.checkbox:checked ~ .customCheck::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  margin-bottom: 2px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.todoText {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.todoText:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .todoText:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.editMode {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.editInputWrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cancelBtn {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  min-height: 36px;
+}
+
+.updateBtn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  min-height: 36px;
+}
+
+.deleteBtn {
+  background-color: var(--delete-color);
+  color: var(--error-text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.deleteBtn:hover:not(:disabled),
+.deleteBtn:active:not(:disabled) {
+  background-color: var(--delete-color-active);
+}

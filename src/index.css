@@ -1,0 +1,93 @@
+:root {
+  --bg-color: #232323;
+  --text-color: #CCCCCC;
+  --surface-color: #333333;
+  --primary-color: #1AC1DD;
+  --secondary-color: #D91066;
+  --accent-1: #7D00B7;
+  --accent-2: #3F9B0B;
+  --border-color: #555555;
+  --error-color: #990000;
+  --error-text-color: #fff;
+  --warning-color: var(--accent-1);
+  --warning-text-color: #fff;
+  --delete-color: #800000;
+  --delete-color-active: #ff1f1f;
+}
+
+[data-theme="light"] {
+  --bg-color: #b2b2b2;
+  --text-color: #232323;
+  --surface-color: #dbdbdb;
+  --border-color: #999999;
+  --error-color: #990000;
+  --error-text-color: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Lato', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+button {
+  font-family: 'Lato', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  border-radius: 8px;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
