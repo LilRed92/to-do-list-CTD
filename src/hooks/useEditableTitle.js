@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sanitizeText } from '../utils/sanitizeText.js';
 
 export function useEditableTitle(initialTitle) {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,7 +21,7 @@ export function useEditableTitle(initialTitle) {
 
   const finishEdit = () => {
     setIsEditing(false);
-    return workingTitle;
+    return sanitizeText(workingTitle);
   };
 
   return {

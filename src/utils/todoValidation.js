@@ -1,3 +1,6 @@
+import { sanitizeText } from './sanitizeText.js';
+
 export function isValidTodoTitle(title) {
-    return title.trim() !== '';
+    const sanitizedTitle = sanitizeText(title);
+    return sanitizedTitle !== '' && sanitizedTitle.length <= 100;
 }

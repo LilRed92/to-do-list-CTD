@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem.jsx";
+import styles from "./TodoList.module.css";
 
 function TodoList({
   todoList,
   onCompleteTodo,
   onUpdateTodo,
+  onDeleteTodo,
   dataVersion,
-  statusFilter = "active",
+  statusFilter = "all",
+  filterTerm = "",
 }) {
   const filteredTodoList = useMemo(() => {
     let filteredTodos;
@@ -23,13 +26,24 @@ function TodoList({
         break;
     }
 
+    if (filterTerm) {
+      const lowerTerm = filterTerm.toLowerCase();
+      filteredTodos = filteredTodos.filter((todo) =>
+        todo.title.toLowerCase().includes(lowerTerm),
+      );
+    }
+
     return {
       version: dataVersion,
       todos: filteredTodos,
     };
-  }, [todoList, dataVersion, statusFilter]);
+  }, [todoList, dataVersion, statusFilter, filterTerm]);
 
   const getEmptyMessage = () => {
+    if (filterTerm) {
+      return `No todos are matching your search: "${filterTerm}"`;
+    }
+
     switch (statusFilter) {
       case "completed":
         return "No completed todos yet. Complete some tasks to see them here.";
@@ -42,15 +56,18 @@ function TodoList({
   };
 
   return filteredTodoList.todos.length === 0 ? (
-    <p>{getEmptyMessage()}</p>
+    <p className={filterTerm ? styles.noSearchResults : styles.emptyMessage}>
+      {getEmptyMessage()}
+    </p>
   ) : (
-    <ul>
+    <ul className={styles.todoUl}>
       {filteredTodoList.todos.map((todo) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
           onCompleteTodo={onCompleteTodo}
           onUpdateTodo={onUpdateTodo}
+          onDeleteTodo={onDeleteTodo}
         />
       ))}
     </ul>

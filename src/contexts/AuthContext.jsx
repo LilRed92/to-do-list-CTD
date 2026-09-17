@@ -11,8 +11,22 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState('');
+  const [email, setEmail] = useState(() => sessionStorage.getItem('auth-email') || '');
+  const [token, setToken] = useState(() => sessionStorage.getItem('auth-token') || '');
+
+  const persistAuth = (newEmail, newToken) => {
+    setEmail(newEmail);
+    setToken(newToken);
+    sessionStorage.setItem('auth-email', newEmail);
+    sessionStorage.setItem('auth-token', newToken);
+  };
+
+  const clearAuth = () => {
+    setEmail('');
+    setToken('');
+    sessionStorage.removeItem('auth-email');
+    sessionStorage.removeItem('auth-token');
+  };
 
   const login = async (userEmail, password) => {
     try {
@@ -25,23 +39,21 @@ export function AuthProvider({ children }) {
       const data = await res.json();
 
       if (res.status === 200 && data.name && data.csrfToken) {
-        setEmail(data.name);
-        setToken(data.csrfToken);
+        persistAuth(data.name, data.csrfToken);
         return { success: true };
       }
       return {
         success: false,
         error: `Authentication failed: ${data?.message || 'Invalid Credentials'}`,
       };
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Network error during login' };
     }
   };
 
   const logout = async () => {
     if (!token) {
-      setEmail('');
-      setToken('');
+      clearAuth();
       return { success: true };
     }
 
@@ -52,14 +64,12 @@ export function AuthProvider({ children }) {
         credentials: 'include',
       });
 
-      setEmail('');
-      setToken('');
+      clearAuth();
 
       if (response.ok) return { success: true };
       return { success: false, error: 'Logout request failed, but you have been logged out locally.' };
-    } catch (error) {
-      setEmail('');
-      setToken('');
+    } catch {
+      clearAuth();
       return { success: false, error: 'Network error during logout' };
     }
   };

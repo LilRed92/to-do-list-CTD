@@ -48,7 +48,7 @@ async function generateCommitMessage() {
 	}
 
 	// 2. Filter out Web, Python, and all local Workflow Tooling clutter
-	let diff = '';
+	let diff;
 	try {
 		diff = execSync(
 			'git diff --cached -- . ' +
@@ -61,16 +61,16 @@ async function generateCommitMessage() {
 			'":(exclude)*readme-generator*" ' +
 			'":(exclude)*pr-description*"'
 		).toString().trim();
-	} catch (err) {
+	} catch {
 		diff = execSync('git diff --cached').toString().trim();
 	}
 
 	if (!diff) diff = execSync('git diff --cached').toString().trim();
 	if (diff.length > 8000) diff = diff.substring(0, 8000) + "\n...[diff truncated]";
 
-	let customRules = '';
+	let customRules;
 	try { customRules = fs.readFileSync('.ai-commit-rules.txt', 'utf8'); }
-	catch (err) { customRules = 'No additional custom rules provided.'; }
+	catch { customRules = 'No additional custom rules provided.'; }
 
 	const prompt = `
 	You are an expert developer. Read the following git diff and write a Conventional Commit message.
@@ -131,7 +131,9 @@ async function generateCommitMessage() {
 				clearTimeout(fallbackTimeoutId);
         console.log(`Groq responded with status ${response.status}`);
 				const data = await response.json();
-				if (data.error) throw new Error(`[${data.error.code ?? response.status}] ${data.error.type ?? ''} ${data.error.message}`);
+				if (data.error) {
+					throw new Error(`[${data.error.code ?? response.status}] ${data.error.type ?? ''} ${data.error.message}`, { cause: primaryErr });
+				}
 
 				let aiMessage = data.choices[0].message.content.trim().replace(/^```\w*\n|\n```$/g, '');
 				if (commitMsgFile) {

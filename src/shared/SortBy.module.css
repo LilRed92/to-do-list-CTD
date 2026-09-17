@@ -1,0 +1,7 @@
+.selectLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}

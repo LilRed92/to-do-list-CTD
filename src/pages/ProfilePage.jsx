@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import ErrorBanner from "../shared/ErrorBanner.jsx";
+import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
   const { email, token } = useAuth();
@@ -57,20 +59,35 @@ function ProfilePage() {
       : 0;
 
   return (
-    <div>
-      <h2>Your Profile</h2>
-      <p>Name: {email}</p>
-      <p>Status: Logged In</p>
+    <div className={styles.profileContainer}>
+      <div className={styles.headerRow}>
+        <h2 className={styles.title}>{email}'s Profile</h2>
+        <span className={styles.statusBadge}>Logged In</span>
+      </div>
 
-      <h3>Todo Statistics</h3>
-      {loading && <p>Loading statistics...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <h3 className={styles.statsHeading}>📊 Todo Statistics</h3>
+      {loading && (
+        <p className={styles.loadingIndicator}>Loading statistics...</p>
+      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
       {!loading && !error && (
-        <div>
-          <p>Total: {todoStats.total}</p>
-          <p>Completed: {todoStats.completed}</p>
-          <p>Active: {todoStats.active}</p>
-          {todoStats.total > 0 && <p>Completion: {completionPercentage}%</p>}
+        <div className={styles.statsList}>
+          <div className={styles.statsRow}>
+            <p>Total: {todoStats.total}</p>
+            <p>Completed: {todoStats.completed}</p>
+            <p>Active: {todoStats.active}</p>
+          </div>
+          {todoStats.total > 0 && (
+            <div className={styles.completionSection}>
+              <p>Completion: {completionPercentage}%</p>
+              <div className={styles.progressTrack}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${completionPercentage}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
