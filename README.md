@@ -12,7 +12,24 @@ To Do List is a clean, lightweight React-based web application designed to help 
 
 ## 🔗 Live Demo
 
-_Link to deployed application on Vercel will go here._
+[Todo List App](https://to-do-list-ctd-git-main-lil-red92.vercel.app/login)
+
+### Deployment Configuration: Vercel Custom 404 Routing
+
+Vercel automatically serves its own default "404 Not Found" page for unmatched routes. To bypass this behavior and ensure the application served my custom 404 page, I made a specific rewrite rule in the `vercel.json` file.
+
+This configuration catches any unrecognized paths and forces Vercel to route the user to the custom 404 destination instead of the default Vercel error screen.
+
+**Added to `vercel.json`:**
+
+```json
+{
+  {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+}
+```
 
 ## ✨ Features
 
